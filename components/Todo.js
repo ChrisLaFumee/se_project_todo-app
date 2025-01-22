@@ -8,9 +8,6 @@ class Todo {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
     });
-  }
-
-  _setEventListeners() {
     this._todoDeleteBtn.addEventListener("click", () => {
       this._todoElement.remove();
     });
