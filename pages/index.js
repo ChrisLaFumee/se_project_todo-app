@@ -32,17 +32,21 @@ const generateTodo = (data) => {
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: (evt) => {
-    evt.preventDefault;
-    const name = evt.name;
-    const dateInput = evt.date;
+  handleFormSubmit: (inputValues) => {
+    const name = inputValues.name;
+    const dateInput = inputValues.date;
     const date = new Date(dateInput);
     date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
     const id = uuidv4();
     const values = { name, date, id };
-    const todo = generateTodo(values);
-    section.addItem(todo);
+
+    const renderTodo = (item) => {
+      const todo = generateTodo(item);
+      section.addItem(todo);
+    };
+
+    renderTodo(values);
     todoCounter.updateTotal(true);
     addTodoPopup.close();
     newTodoValidator.resetValidator();
